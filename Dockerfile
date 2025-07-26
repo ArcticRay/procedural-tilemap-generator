@@ -10,11 +10,15 @@ RUN apt-get update \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Dev‑Stage 
 FROM base AS dev
 RUN pip install --no-cache-dir uvicorn[standard] watchdog
-
-# Kopiere Quellcode und Tests
-COPY app/ ./app
-COPY tests/ ./tests
-
+COPY app/    ./app
+COPY tests/  ./tests
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80", "--reload"]
+
+# Prod‑Stage 
+FROM base AS prod
+COPY app/ ./app
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
