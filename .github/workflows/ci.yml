@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Build Dev Image & Run Tests
+        run: |
+          docker build --target dev -t pmg-dev .
+          docker run --rm pmg-dev pytest --maxfail=1 --disable-warnings -q
+
+      - name: Lint with flake8
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/app \
+            pmg-dev \
+            flake8
+
+      - name: Build Prod Image
+        run: docker build --target prod -t pmg-service .
