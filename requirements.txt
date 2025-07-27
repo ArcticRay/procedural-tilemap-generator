@@ -5,3 +5,4 @@ pytest
 flake8
 isort
 httpx
+pyyaml

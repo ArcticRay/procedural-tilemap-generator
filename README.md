@@ -6,7 +6,7 @@ Lightweight FastAPI microservice for procedural generation of 2D tilemaps using 
 
 - **POST /generate_map/**
   - Parameters: `width`, `height`, `biome`
-  - Returns: JSON grid of tiles (`water`, `sand`, `rock`)
+  - Returns: JSON grid of tiles
 - **Docker**
   - Dev & prod images, live reload in dev
 - **Tests & Linting**

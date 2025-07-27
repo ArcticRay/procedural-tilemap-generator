@@ -1,0 +1,29 @@
+desert:
+  thresholds:
+    water: -0.2
+    sand: 0.1
+    rock: 1.0
+  tiles:
+    water: ["water_oasis"]
+    sand: ["sand", "dune"]
+    rock: ["rock", "stone"]
+
+forest:
+  thresholds:
+    water: -0.1
+    grass: 0.2
+    rock: 1.0
+  tiles:
+    water: ["water_stream"]
+    grass: ["grass", "forest_floor"]
+    rock: ["rock"]
+
+tundra:
+  thresholds:
+    water: -0.05
+    snow: 0.3
+    rock: 1.0
+  tiles:
+    water: ["ice"]
+    snow: ["snow"]
+    rock: ["rock"]
