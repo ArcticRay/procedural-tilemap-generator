@@ -47,3 +47,22 @@ def test_generate_map_get_success():
 def test_generate_map_get_errors(qs):
     resp = client.get(f"/generate_map/{qs}")
     assert resp.status_code == 422
+
+
+def test_generate_map_png_success():
+    resp = client.get("/generate_map/png?width=4&height=4&biome=forest")
+    assert resp.status_code == 200
+    assert resp.headers["content-type"] == "image/png"
+    assert resp.content.startswith(b"\x89PNG")  # PNG signature
+
+
+@pytest.mark.parametrize(
+    "qs",
+    [
+        "?width=0&height=5&biome=forest",
+        "?width=5&height=5&biome=void",
+    ],
+)
+def test_generate_map_png_errors(qs):
+    resp = client.get(f"/generate_map/png{qs}")
+    assert resp.status_code == 422

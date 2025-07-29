@@ -1,6 +1,8 @@
 from fastapi import APIRouter, Query, HTTPException
 from app.models.map_request import MapRequest
 from app.generators.perlin import generate_tilemap
+from fastapi.responses import Response
+from app.generators.png import render_tilemap_png
 
 router = APIRouter()
 
@@ -23,3 +25,19 @@ def generate_map_get(
         # Return 422 for false Biome
         raise HTTPException(status_code=422, detail=str(e))
     return {"map": grid}
+
+
+@router.get(
+    "/png", response_class=Response, responses={200: {"content": {"image/png": {}}}}
+)
+def generate_map_png(
+    width: int = Query(..., gt=0),
+    height: int = Query(..., gt=0),
+    biome: str = Query(...),
+    tile_size: int = Query(16, gt=1),
+):
+    try:
+        png_bytes = render_tilemap_png(width, height, biome, tile_size)
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=str(e))
+    return Response(content=png_bytes, media_type="image/png")
