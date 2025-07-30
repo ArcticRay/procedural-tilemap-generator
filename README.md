@@ -2,7 +2,7 @@
 
 **FastAPI** microservice for procedural generation of 2D tilemaps with configurable biome rulesets, live-reload development, and multiple export formats.
 
-[![CI](https://github.com/your-org/pmg-service/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/pmg-service/actions/workflows/ci.yml)
+[![CI](https://github.com/arcticray/procedural-tilemap-generator/actions/workflows/ci.yml/badge.svg)](https://github.com/arcticray/procedural-tilemap-generator/actions/workflows/ci.yml)
 
 ---
 
