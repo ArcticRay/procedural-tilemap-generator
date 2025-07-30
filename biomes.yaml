@@ -1,7 +1,7 @@
 desert:
   thresholds:
     water: -0.2
-    sand: 0.1
+    sand: 0.3
     rock: 1.0
   tiles:
     water: ["water_oasis"]
