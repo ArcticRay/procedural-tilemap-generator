@@ -4,6 +4,7 @@ from app.generators.perlin import generate_tilemap
 from fastapi.responses import Response
 from app.generators.png import render_tilemap_png
 from app.generators.tmx import render_tilemap_tmx
+from app.generators.svg import render_tilemap_svg
 
 router = APIRouter()
 
@@ -60,3 +61,19 @@ def generate_map_tmx(
     except ValueError as e:
         raise HTTPException(status_code=422, detail=str(e))
     return Response(content=tmx_bytes, media_type="application/xml")
+
+
+@router.get(
+    "/svg", response_class=Response, responses={200: {"content": {"image/svg+xml": {}}}}
+)
+def generate_map_svg(
+    width: int = Query(..., gt=0),
+    height: int = Query(..., gt=0),
+    biome: str = Query(...),
+    tile_size: int = Query(16, gt=1),
+):
+    try:
+        svg = render_tilemap_svg(width, height, biome, tile_size)
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=str(e))
+    return Response(content=svg, media_type="image/svg+xml")

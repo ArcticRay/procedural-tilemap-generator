@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Tilemap Generator Playground</title>
+  </head>
+  <body>
+    <h1>Procedural Tilemap Generator</h1>
+    <form method="get" action="/">
+      Width:
+      <input name="width" value="{{ width }}" type="number" min="1" /> Height:
+      <input name="height" value="{{ height }}" type="number" min="1" /> Biome:
+      <input name="biome" value="{{ biome }}" /> Tile Size:
+      <input name="tile_size" value="{{ tile_size }}" type="number" min="1" />
+      <button type="submit">Generate</button>
+    </form>
+    {% if map_generated %}
+    <h2>Preview</h2>
+    <img
+      src="/generate_map/png?width={{width}}&height={{height}}&biome={{biome}}&tile_size={{tile_size}}"
+      alt="Tilemap"
+    />
+    <p>
+      <a
+        href="/generate_map/svg?width={{width}}&height={{height}}&biome={{biome}}&tile_size={{tile_size}}"
+        download="map.svg"
+        >Download SVG</a
+      >
+      &nbsp;|&nbsp;
+      <a
+        href="/generate_map/tmx?width={{width}}&height={{height}}&biome={{biome}}&tile_size={{tile_size}}"
+        download="map.tmx"
+        >Download TMX</a
+      >
+    </p>
+    {% endif %}
+  </body>
+</html>

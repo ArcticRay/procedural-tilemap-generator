@@ -8,3 +8,4 @@ httpx
 pyyaml
 pillow
 pytmx
+jinja2

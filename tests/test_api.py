@@ -86,3 +86,18 @@ def test_generate_map_tmx_success():
 def test_generate_map_tmx_errors(qs):
     resp = client.get(f"/generate_map/tmx{qs}")
     assert resp.status_code == 422
+
+
+def test_generate_map_svg_success():
+    resp = client.get("/generate_map/svg?width=4&height=4&biome=forest")
+    assert resp.status_code == 200
+    assert resp.headers["content-type"].startswith("image/svg+xml")
+    assert resp.text.strip().startswith("<svg")
+
+
+@pytest.mark.parametrize(
+    "qs", ["?width=0&height=5&biome=forest", "?width=5&height=5&biome=void"]
+)
+def test_generate_map_svg_errors(qs):
+    resp = client.get(f"/generate_map/svg{qs}")
+    assert resp.status_code == 422
