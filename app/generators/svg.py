@@ -19,7 +19,9 @@ def render_tilemap_svg(width: int, height: int, biome: str, tile_size: int = 16)
             px = x * tile_size
             py = y * tile_size
             lines.append(
-                f'<rect x="{px}" y="{py}" width="{tile_size}" height="{tile_size}" fill="{hexcol}"/>'
+                f'<rect x="{px}" y="{py}" '
+                f'width="{tile_size}" height="{tile_size}" '
+                f'fill="{hexcol}"/>'
             )
     lines.append("</svg>")
     return "\n".join(lines)
