@@ -2,8 +2,10 @@ from fastapi import FastAPI
 from app.api.v1 import router as api_v1
 from fastapi import Request
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI(title="Procedural Map Generator")
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 templates = Jinja2Templates(directory="app/templates")
 

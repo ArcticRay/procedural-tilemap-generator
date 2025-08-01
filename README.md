@@ -6,32 +6,36 @@
 
 ---
 
-## 🚀 Features (Current)
+## 🚀 Features
 
 - **REST API Endpoints**
-  - `POST  /generate_map/` → JSON tile‐grid
+  - `POST  /generate_map/` → JSON tile grid
   - `GET   /generate_map/` → JSON via query params
-  - `GET   /generate_map/png` → PNG image of the map
+  - `GET   /generate_map/png` → PNG image
+  - `GET   /generate_map/svg` → SVG vector map
+  - `GET   /generate_map/tmx` → TMX file for Tiled
 - **Biome Ruleset**
-  - External `biomes.yaml` defines thresholds & tile variants
-  - Throw 422 on unknown biome
+  - External `biomes.yaml` defines thresholds & variants
+  - Validates input, returns 422 on unknown biome
 - **Variability**
-  - Each request produces a unique map via random noise offsets
+  - Randomized noise offsets → every request yields a fresh map
+- **Playground UI**
+  - Interactive form, live PNG preview, download SVG/TMX buttons
 - **Dockerized**
   - **Dev** image: live‐reload (`uvicorn --reload`), mounted code & config
-  - **Prod** image: minimal, tests & dev tools excluded
+  - **Prod** image: lean, excludes dev tools & tests
 - **Testing & Linting**
-  - `pytest` for unit & integration tests (API, generator, biomes)
-  - `flake8` + `isort` + **Black** for consistent style
+  - `pytest` for unit/integration tests
+  - `flake8`, `isort`, **Black** for style enforcement
 - **CI/CD**
-  - GitHub Actions runs tests, lint, builds both dev & prod images
+  - GitHub Actions: tests → lint → build dev & prod images
 
 ---
 
 ## 🖼️ Example Maps
 
-**16×16 (forest)**  
-![16x16 Forest](examples/map-32x32-forest.png)
+**32×32 (forest)**  
+![32x32 Forest](examples/map-32x32-forest.png)
 
 **32×32 (desert)**  
 ![32x32 Desert](examples/map-32x32-desert.png)
