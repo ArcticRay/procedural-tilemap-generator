@@ -20,7 +20,7 @@ def render_tilemap_tmx(
     }
     root = ET.Element("map", map_attrib)
 
-    tileset = ET.SubElement(
+    ET.SubElement(
         root,
         "tileset",
         {
