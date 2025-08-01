@@ -3,6 +3,7 @@ from app.models.map_request import MapRequest
 from app.generators.perlin import generate_tilemap
 from fastapi.responses import Response
 from app.generators.png import render_tilemap_png
+from app.generators.tmx import render_tilemap_tmx
 
 router = APIRouter()
 
@@ -41,3 +42,21 @@ def generate_map_png(
     except ValueError as e:
         raise HTTPException(status_code=422, detail=str(e))
     return Response(content=png_bytes, media_type="image/png")
+
+
+@router.get(
+    "/tmx",
+    response_class=Response,
+    responses={200: {"content": {"application/xml": {}}}},
+)
+def generate_map_tmx(
+    width: int = Query(..., gt=0),
+    height: int = Query(..., gt=0),
+    biome: str = Query(...),
+    tile_size: int = Query(32, gt=1),
+):
+    try:
+        tmx_bytes = render_tilemap_tmx(width, height, biome, tile_size)
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=str(e))
+    return Response(content=tmx_bytes, media_type="application/xml")

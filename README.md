@@ -31,7 +31,7 @@
 ## 🖼️ Example Maps
 
 **16×16 (forest)**  
-![16x16 Forest](examples/map-16x16-forest.png)
+![16x16 Forest](examples/map-32x32-forest.png)
 
 **32×32 (desert)**  
 ![32x32 Desert](examples/map-32x32-desert.png)

@@ -66,3 +66,23 @@ def test_generate_map_png_success():
 def test_generate_map_png_errors(qs):
     resp = client.get(f"/generate_map/png{qs}")
     assert resp.status_code == 422
+
+
+def test_generate_map_tmx_success():
+    resp = client.get("/generate_map/tmx?width=4&height=4&biome=desert")
+    assert resp.status_code == 200
+    assert resp.headers["content-type"] in ("application/xml", "text/xml")
+
+    assert resp.text.strip().startswith("<?xml")
+
+
+@pytest.mark.parametrize(
+    "qs",
+    [
+        "?width=0&height=5&biome=forest",
+        "?width=5&height=5&biome=void",
+    ],
+)
+def test_generate_map_tmx_errors(qs):
+    resp = client.get(f"/generate_map/tmx{qs}")
+    assert resp.status_code == 422
