@@ -41,3 +41,10 @@
 ![32x32 Desert](examples/map-32x32-desert.png)
 
 ---
+
+## Application Preview
+
+**Preview of Application**
+![Application Preview](examples/application_preview.png)
+
+---

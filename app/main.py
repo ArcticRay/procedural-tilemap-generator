@@ -13,10 +13,10 @@ templates = Jinja2Templates(directory="app/templates")
 @app.get("/", include_in_schema=False)
 def playground(
     request: Request,
-    width: int = 16,
-    height: int = 16,
-    biome: str = "forest",
-    tile_size: int = 16,
+    width: int = 32,
+    height: int = 32,
+    biome: str = "desert",
+    tile_size: int = 8,
 ):
     return templates.TemplateResponse(
         "index.html",
